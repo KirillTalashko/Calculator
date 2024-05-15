@@ -18,4 +18,18 @@
     <string name="_2">2</string>
     <string name="_1">1</string>
     <string name="_0">0</string>
+
+    <string name="hello_text">Привет,Мир</string>
+    <string name="button_click">НАЖМИ МЕНЯ</string>
+    <string name="edit">Введите текст</string>
+    <string name="check">Флажок</string>
+    <string name="radioButtonNightStyle">ночь</string>
+    <string name="radioButtonLightStyle">день</string>
+    <string name="toggleButtonOff">Выключено</string>
+    <string name="toggleButtonOn">Включено</string>
+
+
+
+
+
 </resources>
