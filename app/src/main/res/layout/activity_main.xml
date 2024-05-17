@@ -5,6 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_settings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/brown"
+        android:src="@drawable/ic_settings_button_forward"/>
+
     <TextView
         android:id="@+id/input_text"
         android:layout_width="match_parent"
@@ -22,7 +33,7 @@
         android:layout_height="2dp"
         android:layout_marginHorizontal="10dp"
         app:layout_constraintBottom_toTopOf="@id/divide"
-        android:background="@color/purple"/>
+        android:background="@color/brown"/>
 
     <Button
         android:id="@+id/divide"
@@ -132,7 +143,7 @@
         android:layout_height="wrap_content"
         android:text="@string/_3"
         style="@style/Button_Style_Black"
-        app:layout_constraintBottom_toTopOf="@id/button"
+        app:layout_constraintBottom_toTopOf="@id/button_point"
         app:layout_constraintEnd_toStartOf="@id/minus"
         app:layout_constraintStart_toEndOf="@id/button_2"/>
 
@@ -165,10 +176,10 @@
         android:text="@string/equally"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/button" />
+        app:layout_constraintStart_toEndOf="@id/button_point" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_point"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_point"
@@ -185,7 +196,7 @@
         android:text="@string/_0"
         style="@style/Button_Style_Black"
         android:layout_marginBottom="15dp"
-        app:layout_constraintEnd_toStartOf="@id/button"
+        app:layout_constraintEnd_toStartOf="@id/button_point"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/delete"/>
 

@@ -1,5 +1,6 @@
 package com.example.calculator
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -8,100 +9,98 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.calculator.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private val str = StringBuilder()
     private var beforeSign = ""
     private var afterSiqn = ""
     private var action = ""
+    private lateinit var binding: ActivityMainBinding
+
     companion object {
         const val KEY = "str"
     }
 
-    private val inputText by lazy { findViewById<TextView>(R.id.input_text) }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val button1 = findViewById<Button>(R.id.button_1)
-        val button2 = findViewById<Button>(R.id.button_2)
-        val button3 = findViewById<Button>(R.id.button_3)
-        val button4 = findViewById<Button>(R.id.button_4)
-        val button5 = findViewById<Button>(R.id.button_5)
-        val button6 = findViewById<Button>(R.id.button_6)
-        val button7 = findViewById<Button>(R.id.button_7)
-        val button8 = findViewById<Button>(R.id.button_8)
-        val button9 = findViewById<Button>(R.id.button_9)
-        val plus = findViewById<Button>(R.id.plus)
-        val minus = findViewById<Button>(R.id.minus)
-        val multiple = findViewById<Button>(R.id.multiple)
-        val divide = findViewById<Button>(R.id.divide)
-        val equally = findViewById<Button>(R.id.equally)
-        val delete = findViewById<Button>(R.id.delete)
-        val buttonPoint = findViewById<Button>(R.id.button)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        initView()
+    }
 
-        button1.setOnClickListener {
-            inputText.text = str.append("1")
+    private fun initView(){
+        binding.delete.setOnClickListener {
+            str.clear()
+            binding.inputText.text = str.toString()
         }
-        button2.setOnClickListener {
-            inputText.text = str.append("2")
+        binding.button1.setOnClickListener {
+            binding.inputText.text = str.append(R.string._1)
         }
-        button3.setOnClickListener {
-            inputText.text = str.append("3")
+        binding.button2.setOnClickListener {
+            binding.inputText.text = str.append(R.string._2)
         }
-        button4.setOnClickListener {
-            inputText.text = str.append("4")
+        binding.button3.setOnClickListener {
+            binding.inputText.text = str.append(R.string._3)
         }
-        button5.setOnClickListener {
-            inputText.text = str.append("5")
+        binding.button4.setOnClickListener {
+            binding.inputText.text = str.append(R.string._4)
         }
-        button6.setOnClickListener {
-            inputText.text = str.append("6")
+        binding.button5.setOnClickListener {
+            binding.inputText.text = str.append(R.string._5)
         }
-        button7.setOnClickListener {
-            inputText.text = str.append("7")
+        binding.button6.setOnClickListener {
+            binding.inputText.text = str.append(R.string._6)
         }
-        button8.setOnClickListener {
-            inputText.text = str.append("8")
+        binding.button7.setOnClickListener {
+            binding.inputText.text = str.append(R.string._7)
         }
-        button9.setOnClickListener {
-            inputText.text = str.append("9")
+        binding.button8.setOnClickListener {
+            binding.inputText.text = str.append(R.string._8)
         }
-        plus.setOnClickListener {
-            inputText.text = str.append("+")
+        binding.button9.setOnClickListener {
+            binding.inputText.text = str.append(R.string._9)
         }
-        minus.setOnClickListener {
-            inputText.text = str.append("-")
+        binding.button0.setOnClickListener{
+            binding.inputText.text = str.append(R.string._0)
         }
-        divide.setOnClickListener {
-            inputText.text = str.append("/")
+        binding.plus.setOnClickListener {
+            binding.inputText.text = str.append(R.string.plus)
         }
-        multiple.setOnClickListener {
-            inputText.text = str.append("*")
+        binding.minus.setOnClickListener {
+            binding.inputText.text = str.append(R.string.minus)
         }
-        buttonPoint.setOnClickListener {
-            inputText.text = str.append("")
+        binding.divide.setOnClickListener {
+            binding.inputText.text = str.append(R.string.divide)
         }
-        equally.setOnClickListener {
+        binding.multiple.setOnClickListener {
+            binding.inputText.text = str.append(R.string.multipli)
+        }
+        binding.buttonPoint.setOnClickListener{
+            binding.inputText.text = str.append(R.string.button_point)
+        }
+        binding.equally.setOnClickListener {
             calculate()
         }
-        delete.setOnClickListener {
-            str.clear()
-            inputText.text = str.toString()
+        binding.buttonSettings.setOnClickListener {
+            val intent = Intent(this@MainActivity, SettingActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
     private fun calculate() {
         try {
             val input = str.toString() //преобразуем в string
-            val numbers = input.split(Regex("[+-/*]")) //разделяем наш массив на разные вводные данные
+            val numbers =
+                input.split(Regex("[+-/*]")) //разделяем наш массив на разные вводные данные
             if (numbers.size >= 2) {
                 beforeSign = numbers[0]
                 afterSiqn = numbers[1]
                 action = input[numbers[0].length].toString()
                 Log.i("youTag", "a = $beforeSign, b = $afterSiqn, action = $action")
                 val result = when (action) {
-                    resources.getString(R.string.divide)-> beforeSign.toDouble() / afterSiqn.toDouble()
+                    resources.getString(R.string.divide) -> beforeSign.toDouble() / afterSiqn.toDouble()
                     resources.getString(R.string.multipli) -> beforeSign.toDouble() * afterSiqn.toDouble()
                     resources.getString(R.string.minus) -> beforeSign.toDouble() - afterSiqn.toDouble()
                     resources.getString(R.string.plus) -> beforeSign.toDouble() + afterSiqn.toDouble()
@@ -109,7 +108,7 @@ class MainActivity : AppCompatActivity() {
                         throw Exception("Error action")
                     }
                 }
-                inputText.text = result.toString()
+                binding.inputText.text = result.toString()
             } else {
                 Log.i("youTag", "Не правильно ввели числа")
             }
@@ -158,6 +157,6 @@ class MainActivity : AppCompatActivity() {
         super.onRestoreInstanceState(savedInstanceState)
         Log.i("youTag", "onRestoreInstanceState ${savedInstanceState.getString("str")}")
         str.append(savedInstanceState.getString(KEY))
-        inputText.text = savedInstanceState.getString(KEY)
+        binding.inputText.text = savedInstanceState.getString(KEY)
     }
 }
