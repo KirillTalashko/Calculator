@@ -28,8 +28,6 @@
     <string name="toggleButtonOff">Выключено</string>
     <string name="toggleButtonOn">Включено</string>
 
-
-
-
-
+    <string name="blank_fragment">Following fragment</string>
+    <string name="blank2_fragment">Back in container</string>
 </resources>
