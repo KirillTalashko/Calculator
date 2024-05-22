@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        Log.i("youTag", "onCreate ${savedInstanceState?.getString("str")}")
         setContentView(binding.root)
         initView()
     }
@@ -35,49 +36,49 @@ class MainActivity : AppCompatActivity() {
             binding.inputText.text = str.toString()
         }
         binding.button1.setOnClickListener {
-            binding.inputText.text = str.append(R.string._1)
+            binding.inputText.text = str.append(resources.getString(R.string._1))
         }
         binding.button2.setOnClickListener {
-            binding.inputText.text = str.append(R.string._2)
+            binding.inputText.text = str.append(resources.getString(R.string._2))
         }
         binding.button3.setOnClickListener {
-            binding.inputText.text = str.append(R.string._3)
+            binding.inputText.text = str.append(resources.getString(R.string._3))
         }
         binding.button4.setOnClickListener {
-            binding.inputText.text = str.append(R.string._4)
+            binding.inputText.text = str.append(resources.getString(R.string._4))
         }
         binding.button5.setOnClickListener {
-            binding.inputText.text = str.append(R.string._5)
+            binding.inputText.text = str.append(resources.getString(R.string._5))
         }
         binding.button6.setOnClickListener {
-            binding.inputText.text = str.append(R.string._6)
+            binding.inputText.text = str.append(resources.getString(R.string._6))
         }
         binding.button7.setOnClickListener {
-            binding.inputText.text = str.append(R.string._7)
+            binding.inputText.text = str.append(resources.getString(R.string._7))
         }
         binding.button8.setOnClickListener {
-            binding.inputText.text = str.append(R.string._8)
+            binding.inputText.text = str.append(resources.getString(R.string._8))
         }
         binding.button9.setOnClickListener {
-            binding.inputText.text = str.append(R.string._9)
+            binding.inputText.text = str.append(resources.getString(R.string._9))
         }
         binding.button0.setOnClickListener{
-            binding.inputText.text = str.append(R.string._0)
+            binding.inputText.text = str.append(resources.getString(R.string._0))
         }
         binding.plus.setOnClickListener {
-            binding.inputText.text = str.append(R.string.plus)
+            binding.inputText.text = str.append(resources.getString(R.string.plus))
         }
         binding.minus.setOnClickListener {
-            binding.inputText.text = str.append(R.string.minus)
+            binding.inputText.text = str.append(resources.getString(R.string.minus))
         }
         binding.divide.setOnClickListener {
-            binding.inputText.text = str.append(R.string.divide)
+            binding.inputText.text = str.append(resources.getString(R.string.divide))
         }
         binding.multiple.setOnClickListener {
-            binding.inputText.text = str.append(R.string.multipli)
+            binding.inputText.text = str.append(resources.getString(R.string.multipli))
         }
         binding.buttonPoint.setOnClickListener{
-            binding.inputText.text = str.append(R.string.button_point)
+            binding.inputText.text = str.append(resources.getString(R.string.button_point))
         }
         binding.equally.setOnClickListener {
             calculate()
