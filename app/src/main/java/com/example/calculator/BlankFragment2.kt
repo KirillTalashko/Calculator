@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.navigation.fragment.findNavController
 
 class BlankFragment2 : Fragment() {
     private lateinit var viewRoot: View
@@ -20,12 +21,7 @@ class BlankFragment2 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewRoot.findViewById<Button>(R.id.button_text2).setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.container,SettingsFragment()).commit()
+            findNavController().navigateUp()
         }
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = BlankFragment2()
     }
 }

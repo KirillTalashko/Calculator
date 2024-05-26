@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.findNavController
 import com.example.calculator.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
@@ -24,19 +25,14 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.ivBack.setOnClickListener{
             requireActivity().finish()
         }
         binding.buttonClick.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.container, BlankFragment()).commit()
+            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToMyFragment())
         }
     }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = SettingsFragment()
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/setting_graph"
+    app:startDestination="@id/settingsFragment">
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.calculator.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+
+        <action
+            android:id="@+id/action_settingsFragment_to_myFragment"
+            app:destination="@+id/BlankFragment"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/BlankFragment"
+        android:name="com.example.calculator.BlankFragment"
+        android:label="frarment_blank"
+        tools:layout="@layout/fragment_blank">
+
+        <action
+            android:id="@+id/action_blankFragment_to_blankFragment2"
+            app:destination="@id/BlankFragment2"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/BlankFragment2"
+        android:name="com.example.calculator.BlankFragment2"
+        android:label="fragment_blank2"
+        tools:layout="@layout/fragment_blank2"/>
+
+</navigation>

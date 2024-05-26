@@ -86,7 +86,6 @@ class MainActivity : AppCompatActivity() {
         binding.buttonSettings.setOnClickListener {
             val intent = Intent(this@MainActivity, SettingActivity::class.java)
             startActivity(intent)
-            finish()
         }
     }
 
