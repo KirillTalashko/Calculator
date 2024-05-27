@@ -22,9 +22,7 @@ class BlankFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewRoot.findViewById<Button>(R.id.button_text).setOnClickListener {
-            findNavController().navigate(BlankFragmentDirections.actionBlankFragmentToBlankFragment2())
-        }
+        findNavController().navigateUp()
     }
 
 }
