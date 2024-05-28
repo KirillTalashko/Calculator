@@ -136,4 +136,14 @@ class HomeFragment : Fragment() {
         outState.putString(MainActivity.KEY, str.toString())
         Log.i("youTag", "onSaveInstanceState $str ${outState.getString("str")}")
     }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        if (savedInstanceState != null) {
+            str.append(savedInstanceState.getString(KEY))
+        }
+        if (savedInstanceState != null) {
+            binding.inputText.text = savedInstanceState.getString(KEY)
+        }
+    }
 }

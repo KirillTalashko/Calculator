@@ -21,6 +21,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        when(Settings.loadTheme(this)){
+            2 -> {
+                setTheme(R.style.AppThemeDark)
+            }
+            else -> {
+                setTheme(R.style.AppThemeLight)
+            }
+        }
         (supportFragmentManager.findFragmentById(R.id.container_1) as NavHostFragment).navController
     }
 

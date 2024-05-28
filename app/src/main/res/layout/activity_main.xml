@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 <androidx.fragment.app.FragmentContainerView
+    android:id="@+id/container_1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/container_1"
+    android:name="androidx.navigation.fragment.NavHostFragment"
     app:navGraph = "@navigation/setting_graph"
     app:defaultNavHost = "true">
 </androidx.fragment.app.FragmentContainerView>
