@@ -1,9 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Calculator" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="AppThemeLight" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#e91e63</item>
+        <item name="colorPrimaryDark">#b0003a</item>
+        <item name="colorAccent">#ff6090</item>
     </style>
-
-    <style name="Theme.Calculator" parent="Base.Theme.Calculator" />
+    <style name="AppThemeDark" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">#182CE3</item>
+        <item name="colorPrimaryDark">#140259</item>
+        <item name="colorAccent">#5D90EA</item>
+    </style>
 </resources>
