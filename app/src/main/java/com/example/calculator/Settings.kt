@@ -9,6 +9,6 @@ object Settings {
         context.getSharedPreferences(THEME,Context.MODE_PRIVATE).edit().putInt(KEY_THEME,theme).apply()
     }
     fun loadTheme(context: Context): Int {
-        return context.getSharedPreferences(THEME,Context.MODE_PRIVATE).getInt(THEME,1)
+        return context.getSharedPreferences(THEME,Context.MODE_PRIVATE).getInt(KEY_THEME,1)
     }
 }

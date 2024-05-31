@@ -25,11 +25,12 @@ class HomeFragment : Fragment() {
     private val binding
         get() = _binding!!
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater)
         return binding.root
     }
