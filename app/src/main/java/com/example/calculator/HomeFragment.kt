@@ -14,8 +14,8 @@ import com.example.calculator.databinding.FragmentHomeBinding
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private var str = StringBuilder()
-    private var beforeSign = ""
-    private var afterSiqn = ""
+    private var beforeSign = 0.0
+    private var afterSiqn = 0.0
     private var action = ""
 
     companion object {
@@ -104,26 +104,30 @@ class HomeFragment : Fragment() {
             val numbers =
                 input.split(Regex("[+-/*]")) //разделяем наш массив на разные вводные данные
             if (numbers.size >= 2) {
-                beforeSign = numbers[0]
-                afterSiqn = numbers[1]
+                beforeSign = numbers[0].toDouble()
+                afterSiqn = numbers[1].toDouble()
                 action = input[numbers[0].length].toString()
                 Log.i("youTag", "a = $beforeSign, b = $afterSiqn, action = $action")
                 val result = when (action) {
-                    resources.getString(R.string.divide) -> beforeSign.toDouble() / afterSiqn.toDouble()
-                    resources.getString(R.string.multipli) -> beforeSign.toDouble() * afterSiqn.toDouble()
-                    resources.getString(R.string.minus) -> beforeSign.toDouble() - afterSiqn.toDouble()
-                    resources.getString(R.string.plus) -> beforeSign.toDouble() + afterSiqn.toDouble()
+                    resources.getString(R.string.divide) -> beforeSign / afterSiqn
+                    resources.getString(R.string.multipli) -> beforeSign * afterSiqn
+                    resources.getString(R.string.minus) -> beforeSign - afterSiqn
+                    resources.getString(R.string.plus) -> beforeSign + afterSiqn
                     else -> {
                         throw Exception("Error action")
                     }
                 }
-                binding.inputText.text = result.toString()
-            }
-            else {
+                if (result == result.toInt().toDouble()) {
+                    binding.inputText.text = result.toInt().toString()
+                } else {
+                    binding.inputText.text = result.toString()
+                }
+            } else {
                 Log.i("youTag", "Не правильно ввели числа")
             }
         } catch (e: Exception) {
-            Log.i("youTag", e.message.toString()) }
+            Log.i("youTag", e.message.toString())
+        }
     }
 
     override fun onDestroy() {
