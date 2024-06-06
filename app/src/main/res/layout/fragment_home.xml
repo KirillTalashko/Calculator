@@ -14,7 +14,7 @@
         android:layout_marginTop="100dp"
         android:layout_marginEnd="10dp"
         android:backgroundTint="@color/brown"
-        android:src="@drawable/ic_settings_button_forward"/>
+        android:src="@drawable/ic_go_to_settings"/>
 
     <TextView
         android:id="@+id/input_text"

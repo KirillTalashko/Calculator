@@ -20,8 +20,5 @@ class BlankFragmentTwo : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewRoot.findViewById<Button>(R.id.button_text2).setOnClickListener {
-            findNavController().navigate(BlankFragmentTwoDirections.actionBlankFragment2ToSettingsFragment())
-        }
     }
 }

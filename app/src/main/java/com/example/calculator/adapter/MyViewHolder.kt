@@ -1,24 +1,57 @@
 package com.example.calculator.adapter
-
-import android.view.View
-import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.calculator.R
+import com.example.calculator.databinding.ItemListAddBinding
+import com.example.calculator.databinding.ItemListBinding
+import com.example.calculator.databinding.ItemListDeleteBinding
+import com.example.calculator.databinding.ItemListEmptyBinding
 
-class MyViewHolder(itemLayoutView: View, private val clickListener: OnClickListener) :
-    RecyclerView.ViewHolder(itemLayoutView) {
-    private val text: TextView = itemLayoutView.findViewById(R.id.text_item)
-    private val cardview: CardView = itemLayoutView.findViewById(R.id.card_view)
 
+class MyViewHolder(
+    private val binding: ItemListBinding,
+    private val clickListener: OnClickListener
+) :
+    RecyclerView.ViewHolder(binding.root) {
     fun bind(item: String) {
-        text.text = item
-        text.setOnClickListener {
+        binding.textItem.text = item
+        binding.imageDelete.setOnClickListener {
             clickListener.onClickDelete(adapterPosition)
         }
-        cardview.setOnLongClickListener {
+        binding.imageAdd.setOnClickListener {
             clickListener.onClickAdd()
-            true
         }
     }
 }
+
+class MyViewHolderDelete(
+    private val binding: ItemListDeleteBinding,
+    private val clickListener: OnClickListener
+) :
+    RecyclerView.ViewHolder(binding.root) {
+    fun bind(item: String) {
+        binding.textItem.text = item
+        binding.imageDelete.setOnClickListener {
+            clickListener.onClickDelete(adapterPosition)
+        }
+    }
+}
+
+    class MyViewHolderAdd(
+        private val binding: ItemListAddBinding,
+        private val clickListener: OnClickListener
+    ) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: String) {
+            binding.textItem.text = item
+            binding.imageAdd.setOnClickListener {
+                clickListener.onClickAdd()
+            }
+        }
+    }
+
+    class MyViewHolderEmpty(private val binding: ItemListEmptyBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind() {
+            binding.listEmpty.text = "list empty"
+        }
+    }
