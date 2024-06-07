@@ -1,12 +1,12 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="AppThemeLight" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">#e91e63</item>
-        <item name="colorPrimaryDark">#b0003a</item>
-        <item name="colorAccent">#ff6090</item>
+<resources>
+    <style name="AppThemeLight" parent="Theme.MaterialComponents.DayNight">
+        <item name="colorPrimary">#FFD180</item>
+        <item name="colorPrimaryDark">#9F6D21</item>
+        <item name="colorAccent">#00BCD4</item>
     </style>
-    <style name="AppThemeDark" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="colorPrimary">#182CE3</item>
+    <style name="AppThemeDark" parent="Theme.MaterialComponents.DayNight">
+        <item name="colorPrimary">#82B1FF</item>
         <item name="colorPrimaryDark">#140259</item>
-        <item name="colorAccent">#5D90EA</item>
+        <item name="colorAccent">#9C27B0</item>
     </style>
 </resources>
