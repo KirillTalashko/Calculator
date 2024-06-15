@@ -15,23 +15,16 @@ class BlankFragment() : Fragment() {
     private val binding
         get() = _binding!!
 
-    private val recyclerList = mutableListOf<String>(
+    private val recyclerList = mutableListOf(
         "News_1",
-        "учу",
-        "вдв",
         "News_2",
         "News_3",
-        "машам",
-        "тащат",
         "News_4",
         "News_5",
         "News_6",
-        "возов",
         "News_7",
-        "ножон",
         "News_8",
     )
-
     private val listAdapter: ListAdapter by lazy {
         ListAdapter(object : OnClickListener {
             override fun onClickDelete(position: Int) {
@@ -41,7 +34,7 @@ class BlankFragment() : Fragment() {
             }
 
             override fun onClickAdd() {
-                Log.i("Tag","${recyclerList.size}")
+                Log.i("Tag", "${recyclerList.size}")
                 val currentList = listAdapter.currentList.toMutableList()
                 currentList.add("News_${currentList.size + 1}")
                 listAdapter.submitList(currentList)
@@ -60,7 +53,18 @@ class BlankFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.rcView.adapter = listAdapter
-        isPalindrome()
+        val listempty = emptyList<Int>()
+        val list1 = arrayListOf(1, 1, 1, 1)
+        val list = arrayListOf(60, 2, 3, 7, 67, 22, 11, 888, 9, 5, 4, 3, 10, 3, 23, 67, 89, 40)
+        val liststr = arrayListOf("2", "3", "5", "6")
+        try {
+            Log.i("Tag", "${findMaxAndSecondList(listempty, true)}")
+            Log.i("Tag", "${findMaxAndSecondList(list1, true)}")
+            Log.i("Tag", "${findMaxAndSecondList(list, true)}")
+            Log.i("Tag", "${findMaxAndSecondList(liststr, false)}")
+        }catch (e:IllegalArgumentException){
+            e.message
+        }
         listAdapter.submitList(recyclerList)
     }
 
@@ -68,14 +72,26 @@ class BlankFragment() : Fragment() {
         super.onDestroy()
         _binding = null
     }
-    private fun isPalindrome(){
-        val list = mutableListOf<String>()
-        for (str in recyclerList){
-            val str2 = str.reversed()
-            if (str != str2) {
-                list.add(str)
+    private fun findMaxAndSecondList(list: List<Any>,  selection : Boolean): Int? {
+        if (list.size < 2) {
+            return null
+        } else {
+            var max = list[0]
+            var second = list[0]
+            for (i in list.indices) {
+                if (list[i] !is Int) {
+                    throw IllegalArgumentException("Wrong argument!")
+                }
+                if ((max as Int) < (list[i] as Int)) {
+                    second = max
+                    max = list[i]
+                }
             }
+            return if (selection) {
+                max as Int
+            }else second as Int
         }
-        recyclerList.retainAll(list)
     }
 }
+
+
