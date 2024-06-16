@@ -53,18 +53,10 @@ class BlankFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.rcView.adapter = listAdapter
-        val listempty = emptyList<Int>()
-        val list1 = arrayListOf(1, 1, 1, 1)
-        val list = arrayListOf(60, 2, 3, 7, 67, 22, 11, 888, 9, 5, 4, 3, 10, 3, 23, 67, 89, 40)
-        val liststr = arrayListOf("2", "3", "5", "6")
-        try {
-            Log.i("Tag", "${findMaxAndSecondList(listempty, true)}")
-            Log.i("Tag", "${findMaxAndSecondList(list1, true)}")
-            Log.i("Tag", "${findMaxAndSecondList(list, true)}")
-            Log.i("Tag", "${findMaxAndSecondList(liststr, false)}")
-        }catch (e:IllegalArgumentException){
-            e.message
-        }
+        val polidrom = "топот"
+        val polidromEmpty = ""
+        Log.i("Tag", "${isPolidrome(polidrom)}")
+        Log.i("Tag", "${isPolidrome(polidromEmpty)}")
         listAdapter.submitList(recyclerList)
     }
 
@@ -72,25 +64,21 @@ class BlankFragment() : Fragment() {
         super.onDestroy()
         _binding = null
     }
-    private fun findMaxAndSecondList(list: List<Any>,  selection : Boolean): Int? {
-        if (list.size < 2) {
-            return null
+    private fun isPolidrome(str: String) : Boolean {
+        if (str.isEmpty()) {
+            return false
         } else {
-            var max = list[0]
-            var second = list[0]
-            for (i in list.indices) {
-                if (list[i] !is Int) {
-                    throw IllegalArgumentException("Wrong argument!")
+            var left = 0
+            var right = str.length - 1
+            while (str[left] < str[right]) {
+                if (str[left] != str[right]) {
+                    return false
                 }
-                if ((max as Int) < (list[i] as Int)) {
-                    second = max
-                    max = list[i]
-                }
+                left++
+                right--
             }
-            return if (selection) {
-                max as Int
-            }else second as Int
         }
+        return true
     }
 }
 
