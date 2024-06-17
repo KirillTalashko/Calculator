@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
 import com.example.calculator.databinding.FragmentSettingsBinding
 

@@ -15,23 +15,16 @@ class BlankFragment() : Fragment() {
     private val binding
         get() = _binding!!
 
-    private val recyclerList = mutableListOf<String>(
+    private val recyclerList = mutableListOf(
         "News_1",
-        "учу",
-        "вдв",
         "News_2",
         "News_3",
-        "машам",
-        "тащат",
         "News_4",
         "News_5",
         "News_6",
-        "возов",
         "News_7",
-        "ножон",
         "News_8",
     )
-
     private val listAdapter: ListAdapter by lazy {
         ListAdapter(object : OnClickListener {
             override fun onClickDelete(position: Int) {
@@ -41,7 +34,7 @@ class BlankFragment() : Fragment() {
             }
 
             override fun onClickAdd() {
-                Log.i("Tag","${recyclerList.size}")
+                Log.i("Tag", "${recyclerList.size}")
                 val currentList = listAdapter.currentList.toMutableList()
                 currentList.add("News_${currentList.size + 1}")
                 listAdapter.submitList(currentList)
@@ -60,7 +53,10 @@ class BlankFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.rcView.adapter = listAdapter
-        isPalindrome()
+        val polidrom = "топот"
+        val polidromEmpty = ""
+        Log.i("Tag", "${isPolidrome(polidrom)}")
+        Log.i("Tag", "${isPolidrome(polidromEmpty)}")
         listAdapter.submitList(recyclerList)
     }
 
@@ -68,14 +64,22 @@ class BlankFragment() : Fragment() {
         super.onDestroy()
         _binding = null
     }
-    private fun isPalindrome(){
-        val list = mutableListOf<String>()
-        for (str in recyclerList){
-            val str2 = str.reversed()
-            if (str != str2) {
-                list.add(str)
+    private fun isPolidrome(str: String) : Boolean {
+        if (str.isEmpty()) {
+            return false
+        } else {
+            var left = 0
+            var right = str.length - 1
+            while (str[left] < str[right]) {
+                if (str[left] != str[right]) {
+                    return false
+                }
+                left++
+                right--
             }
         }
-        recyclerList.retainAll(list)
+        return true
     }
 }
+
+
