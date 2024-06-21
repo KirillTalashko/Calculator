@@ -1,10 +1,9 @@
-package com.example.calculator.adapter
+package com.example.calculator.presentation.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.calculator.R
 import com.example.calculator.databinding.ItemListBinding
 
 class Adapter(

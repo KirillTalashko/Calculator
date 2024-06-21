@@ -1,4 +1,4 @@
-package com.example.calculator.adapter
+package com.example.calculator.presentation.adapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.calculator.databinding.ItemListAddBinding
 import com.example.calculator.databinding.ItemListBinding

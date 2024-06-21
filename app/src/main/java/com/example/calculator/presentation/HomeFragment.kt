@@ -1,14 +1,21 @@
-package com.example.calculator
+package com.example.calculator.presentation
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.calculator.R
 import com.example.calculator.databinding.FragmentHomeBinding
+import com.example.calculator.domain.MyRepositoryImpl
+import com.example.calculator.model.Order
+import com.example.calculator.model.OrderStatus
+import com.example.calculator.presentation.viewModel.MyViewModel
+import com.example.calculator.presentation.viewModel.MyViewModelFactory
+import com.example.calculator.presentation.viewModel.MyViewModelState
 
 
 class HomeFragment : Fragment() {
@@ -17,6 +24,12 @@ class HomeFragment : Fragment() {
     private var beforeSign = 0.0
     private var afterSiqn = 0.0
     private var action = ""
+    private val repository = MyRepositoryImpl()
+
+    private val viewModel: MyViewModel by lazy {
+        ViewModelProvider(this, factory = MyViewModelFactory(repository))[MyViewModel::class.java]
+    }
+    //private val viewModel: MyViewModel by viewModels { MyViewModelFactory(repository) }
 
     companion object {
         const val KEY = "str"
@@ -38,6 +51,44 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        viewModel.wait1()
+        viewModel.resultLiveData.observe(viewLifecycleOwner) {
+            binding.inputText.text = it
+        }
+        viewModel.getData()
+        viewModel.state.observe(viewLifecycleOwner) {
+            when (it) {
+                is MyViewModelState.Error -> {
+                    Log.i("YouTag", it.error.toString())
+                }
+
+                MyViewModelState.Loading -> {
+                    Log.i("YouTag", it.toString())
+                }
+
+                is MyViewModelState.Success -> {
+                    Log.i("YouTag", it.data)
+                }
+            }
+        }
+        val order = Order(OrderStatus.ORDERED)
+        order.printStatus()
+
+        order.proceedToNextStatus()
+        order.printStatus()
+
+        order.proceedToNextStatus()
+        order.printStatus()
+
+        order.updateStatus(OrderStatus.CANCELLED)
+        order.printStatus()
+
+        try {
+            order.proceedToNextStatus()
+        } catch (e: IllegalStateException) {
+            e.message?.let { Log.i("YouTag", it) }
+        }
+
     }
 
     private fun initView() {
