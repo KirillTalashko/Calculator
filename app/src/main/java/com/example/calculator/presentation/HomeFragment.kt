@@ -1,18 +1,13 @@
 package com.example.calculator.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.example.calculator.R
+import androidx.fragment.app.viewModels
 import com.example.calculator.databinding.FragmentHomeBinding
 import com.example.calculator.domain.MyRepositoryImpl
-import com.example.calculator.model.Order
-import com.example.calculator.model.OrderStatus
 import com.example.calculator.presentation.viewModel.MyViewModel
 import com.example.calculator.presentation.viewModel.MyViewModelFactory
 import com.example.calculator.presentation.viewModel.MyViewModelState
@@ -24,12 +19,12 @@ class HomeFragment : Fragment() {
     private var beforeSign = 0.0
     private var afterSiqn = 0.0
     private var action = ""
-    private val repository = MyRepositoryImpl()
 
-    private val viewModel: MyViewModel by lazy {
+
+    /*  private val viewModel: MyViewModel by lazy {
         ViewModelProvider(this, factory = MyViewModelFactory(repository))[MyViewModel::class.java]
-    }
-    //private val viewModel: MyViewModel by viewModels { MyViewModelFactory(repository) }
+    }*/
+    private val viewModel: MyViewModel by viewModels { MyViewModelFactory(MyRepositoryImpl()) }
 
     companion object {
         const val KEY = "str"
@@ -50,11 +45,36 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
+        viewModel.getData()
+        viewModel.state.observe(viewLifecycleOwner) {
+            when (it) {
+                is MyViewModelState.Error -> {
+                    binding.progress.visibility = View.GONE
+                    binding.text.visibility = View.VISIBLE
+                    binding.text.text = it.error.message
+                }
+
+                MyViewModelState.Loading -> {
+                    binding.progress.visibility = View.VISIBLE
+                    binding.text.visibility = View.GONE
+                }
+
+                is MyViewModelState.Success -> {
+                    binding.progress.visibility = View.GONE
+                    binding.text.visibility = View.VISIBLE
+                    binding.text.text = it.data
+
+                }
+            }
+        }
+    }
+}
+/*        initView()
         viewModel.wait1()
         viewModel.resultLiveData.observe(viewLifecycleOwner) {
             binding.inputText.text = it
         }
+
         viewModel.getData()
         viewModel.state.observe(viewLifecycleOwner) {
             when (it) {
@@ -80,7 +100,7 @@ class HomeFragment : Fragment() {
         order.proceedToNextStatus()
         order.printStatus()
 
-        order.updateStatus(OrderStatus.CANCELLED)
+       order.updateStatus(OrderStatus.CANCELLED)
         order.printStatus()
 
         try {
@@ -88,10 +108,9 @@ class HomeFragment : Fragment() {
         } catch (e: IllegalStateException) {
             e.message?.let { Log.i("YouTag", it) }
         }
-
     }
 
-    private fun initView() {
+   private fun initView() {
         binding.delete.setOnClickListener {
             str.clear()
             binding.inputText.text = str.toString()
@@ -202,4 +221,4 @@ class HomeFragment : Fragment() {
             binding.inputText.text = savedInstanceState.getString(KEY)
         }
     }
-}
+}*/

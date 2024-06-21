@@ -7,9 +7,12 @@ import com.example.calculator.domain.MyRepositoryImpl
 
 class MyViewModel(private val repository: MyRepositoryImpl) : ViewModel() {
 
-    val resultLiveData = MutableLiveData<String>()
+    private val _resultLiveData = MutableLiveData<String>()
+    val resultLiveData: LiveData<String>
+        get() = _resultLiveData
 
     private var i = 0
+    val str = "Hello"
     private val _state = MutableLiveData<MyViewModelState>(MyViewModelState.Loading)
     val state: LiveData<MyViewModelState>
         get() = _state
@@ -23,7 +26,7 @@ class MyViewModel(private val repository: MyRepositoryImpl) : ViewModel() {
             while (true) {
                 try {
                     i = repository.getData(i)
-                    resultLiveData.postValue(i.toString())
+                    _resultLiveData.postValue(i.toString())
                     Thread.sleep(1000)
                 } catch (e: InterruptedException) {
                     e.printStackTrace()
