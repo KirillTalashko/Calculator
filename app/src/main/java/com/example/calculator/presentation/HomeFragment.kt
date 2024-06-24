@@ -51,11 +51,10 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-        viewModel.wait1()
+
         viewModel.resultLiveData.observe(viewLifecycleOwner) {
             binding.inputText.text = it
         }
-        viewModel.getData()
         viewModel.state.observe(viewLifecycleOwner) {
             when (it) {
                 is MyViewModelState.Error -> {
@@ -142,11 +141,26 @@ class HomeFragment : Fragment() {
             binding.inputText.text = str.append(resources.getString(R.string.button_point))
         }
         binding.equally.setOnClickListener {
-            calculate()
+            viewModel.defineNumbers()
         }
         binding.buttonSettings.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToSettingsFragment())
         }
+
+        viewModel.actionLiveData.observe(viewLifecycleOwner) {
+            defineAction(it)
+        }
+    }
+
+    private fun defineAction(str: String) {
+        viewModel.action = when (str) {
+            resources.getString(R.string.divide) -> Action.DIVIDE
+            resources.getString(R.string.multipli) -> Action.MULTIPLI
+            resources.getString(R.string.minus) -> Action.MINUS
+            resources.getString(R.string.plus) -> Action.PLUS
+            else -> Action.DIVIDE
+        }
+        viewModel.calculate()
     }
 
     private fun calculate() {
