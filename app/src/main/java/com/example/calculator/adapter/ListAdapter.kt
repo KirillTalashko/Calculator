@@ -92,12 +92,4 @@ class ListAdapter(private val clickListener: OnClickListener) :
             }
         }
     }
-    private fun isPalindrome(){
-        for (str in currentList){
-            val str1 = str.reversed()
-            if (str == str1) {
-                currentList.remove(str)
-            }
-        }
-    }
 }
