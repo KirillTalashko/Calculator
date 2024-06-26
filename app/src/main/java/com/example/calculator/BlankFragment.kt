@@ -53,32 +53,12 @@ class BlankFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.rcView.adapter = listAdapter
-        val polidrom = "топот"
-        val polidromEmpty = ""
-        Log.i("Tag", "${isPolidrome(polidrom)}")
-        Log.i("Tag", "${isPolidrome(polidromEmpty)}")
         listAdapter.submitList(recyclerList)
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-    }
-    private fun isPolidrome(str: String) : Boolean {
-        if (str.isEmpty()) {
-            return false
-        } else {
-            var left = 0
-            var right = str.length - 1
-            while (str[left] < str[right]) {
-                if (str[left] != str[right]) {
-                    return false
-                }
-                left++
-                right--
-            }
-        }
-        return true
     }
 }
 

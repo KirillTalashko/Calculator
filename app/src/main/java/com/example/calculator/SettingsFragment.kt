@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.calculator.databinding.FragmentSettingsBinding
+import com.example.calculator.extentions.log
 
 class SettingsFragment : Fragment() {
 
@@ -45,13 +46,13 @@ class SettingsFragment : Fragment() {
 
         binding.radioButtonLightStyle.setOnClickListener {
             Settings.saveTheme(requireContext(), 1)
-            Log.i("Tag", "${Settings.loadTheme(requireContext())}")
+            "${Settings.loadTheme(requireContext())}".log()
             requireActivity().recreate()
 
         }
         binding.radioButtonNightStyle.setOnClickListener {
             Settings.saveTheme(requireContext(), 2)
-            Log.i("Tag", "${Settings.loadTheme(requireContext())}")
+            "${Settings.loadTheme(requireContext())}".log()
             requireActivity().recreate()
         }
 

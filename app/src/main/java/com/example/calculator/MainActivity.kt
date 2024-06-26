@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.fragment.NavHostFragment
 import com.example.calculator.R.layout.fragment_home
 import com.example.calculator.databinding.ActivityMainBinding
+import com.example.calculator.extentions.log
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,11 +23,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        when(Settings.loadTheme(this)){
+        when (Settings.loadTheme(this)) {
             2 -> {
                 setTheme(R.style.AppThemeDark)
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
+
             else -> {
                 setTheme(R.style.AppThemeLight)
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -39,31 +41,31 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        Log.i("youTag", "onStart")
+        "onStart".log()
     }
 
     override fun onResume() {
         super.onResume()
-        Log.i("youTag", "onResume")
+        "onResume".log()
     }
 
     override fun onRestart() {
         super.onRestart()
-        Log.i("youTag", "onRestart")
+        "onRestart".log()
     }
 
     override fun onPause() {
         super.onPause()
-        Log.i("youTag", "onPause")
+        "onPause".log()
     }
 
     override fun onStop() {
         super.onStop()
-        Log.i("youTag", "onStop")
+        "onStop".log()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.i("youTag", "onDestroy")
+        "onDestroy".log()
     }
 }
