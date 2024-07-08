@@ -10,7 +10,7 @@ import com.example.calculator.databinding.FragmentBlankBinding
 import com.example.calculator.presentation.adapter.ListAdapter
 import com.example.calculator.presentation.adapter.OnClickListener
 
-class BlankFragment : Fragment() {
+class BlankFragment : Fragment(), OnClickListener {
     private var _binding: FragmentBlankBinding? = null
     private val binding
         get() = _binding!!
@@ -25,21 +25,22 @@ class BlankFragment : Fragment() {
         "News_7",
         "News_8",
     )
-    private val listAdapter: ListAdapter by lazy {
-        ListAdapter(object : OnClickListener {
-            override fun onClickDelete(position: Int) {
-                val currentList = listAdapter.currentList.toMutableList()
-                currentList.removeAt(position)
-                listAdapter.submitList(currentList)
-            }
 
-            override fun onClickAdd() {
-                Log.i("Tag", "${recyclerList.size}")
-                val currentList = listAdapter.currentList.toMutableList()
-                currentList.add("News_${currentList.size + 1}")
-                listAdapter.submitList(currentList)
-            }
-        })
+    override fun onClickDelete(position: Int) {
+        val currentList = listAdapter.currentList.toMutableList()
+        currentList.removeAt(position)
+        listAdapter.submitList(currentList)
+    }
+
+    override fun onClickAdd() {
+        Log.i("Tag", "${recyclerList.size}")
+        val currentList = listAdapter.currentList.toMutableList()
+        currentList.add("News_${currentList.size + 1}")
+        listAdapter.submitList(currentList)
+    }
+
+    private val listAdapter: ListAdapter by lazy {
+        ListAdapter(this)
     }
 
     override fun onCreateView(
@@ -64,7 +65,8 @@ class BlankFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
-    private fun isPolidrome(str: String) : Boolean {
+
+    private fun isPolidrome(str: String): Boolean {
         if (str.isEmpty()) {
             return false
         } else {

@@ -33,7 +33,13 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         Log.i("youTag", "onStart")
+        val cat1 = Cat("fd", 1)
+        val cat2 = Cat("fd", 1)
+        val eq = cat1 === cat2
+        Log.i("youTag", "$eq")
     }
+
+    data class Cat(val name: String, val age: Int)
 
     override fun onResume() {
         super.onResume()
