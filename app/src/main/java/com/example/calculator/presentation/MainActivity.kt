@@ -1,28 +1,20 @@
-package com.example.calculator
+package com.example.calculator.presentation
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.Button
-import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.fragment.NavHostFragment
-import com.example.calculator.R.layout.fragment_home
-import com.example.calculator.databinding.ActivityMainBinding
+import com.example.calculator.R
 import com.example.calculator.extentions.log
+import com.example.calculator.utils.Settings
 
 class MainActivity : AppCompatActivity() {
 
     companion object {
         const val KEY = "str"
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
+        "onCreate".log()
         when (Settings.loadTheme(this)) {
             2 -> {
                 setTheme(R.style.AppThemeDark)
