@@ -1,10 +1,11 @@
-package com.example.calculator
+package com.example.calculator.presentation.viewModel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.calculator.domain.MyRepository
+import com.example.calculator.domain.MyRepositoryImpl
+import com.example.calculator.presentation.Action
 import com.example.calculator.extentions.log
-import kotlin.math.log
 
 class MyViewModel() : ViewModel() {
 
@@ -42,8 +43,10 @@ class MyViewModel() : ViewModel() {
             }
             if (result == result.toInt().toDouble()) {
                 resultViewModel.value = result.toInt().toString()
+                str.clear()
             } else {
                 resultViewModel.value = result.toString()
+                str.clear()
             }
         } catch (e: Exception) {
             e.message?.log()

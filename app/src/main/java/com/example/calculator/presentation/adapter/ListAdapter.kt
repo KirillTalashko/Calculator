@@ -1,31 +1,27 @@
-package com.example.calculator.adapter
+package com.example.calculator.presentation.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.calculator.databinding.ItemListAddBinding
 import com.example.calculator.databinding.ItemListBinding
-import com.example.calculator.databinding.ItemListDeleteBinding
 import com.example.calculator.databinding.ItemListEmptyBinding
+import com.example.calculator.model.Order
 
 class ListAdapter(private val clickListener: OnClickListener) :
-    ListAdapter<String, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+    ListAdapter<Order, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<String>() {
-            override fun areItemsTheSame(oldItem: String, newItem: String) =
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Order>() {
+            override fun areItemsTheSame(oldItem: Order, newItem: Order) =
                 oldItem == newItem
 
-            override fun areContentsTheSame(oldItem: String, newItem: String) =
+            override fun areContentsTheSame(oldItem: Order, newItem: Order) =
                 oldItem == newItem
         }
         private const val VIEW_HOLDER = 0
-        private const val VIEW_HOLDER_ADD = 1
-        private const val VIEW_HOLDER_DELETE = 2
-        private const val VIEW_HOLDER_EMPTY = 3
+        private const val VIEW_HOLDER_EMPTY = 1
 
     }
 
@@ -38,18 +34,10 @@ class ListAdapter(private val clickListener: OnClickListener) :
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (currentList.size == 1){
-            VIEW_HOLDER
+        return if (currentList.size == 0){
+            VIEW_HOLDER_EMPTY
         } else {
-            if (currentList.isEmpty()) {
-                VIEW_HOLDER_EMPTY
-            } else {
-                if (position % 2 == 0) {
-                    VIEW_HOLDER_ADD
-                } else {
-                    VIEW_HOLDER_DELETE
-                }
-            }
+            VIEW_HOLDER
         }
     }
 
@@ -60,16 +48,6 @@ class ListAdapter(private val clickListener: OnClickListener) :
             VIEW_HOLDER_EMPTY -> {
                 val view = ItemListEmptyBinding.inflate(layoutInflater,parent,false)
                 MyViewHolderEmpty(view)
-            }
-
-            VIEW_HOLDER_ADD -> {
-                val view = ItemListAddBinding.inflate(layoutInflater,parent,false)
-                MyViewHolderAdd(view,clickListener)
-            }
-            VIEW_HOLDER_DELETE -> {
-                val view = ItemListDeleteBinding.inflate(layoutInflater,parent,false)
-                MyViewHolderDelete(view,clickListener)
-
             }
             else -> {
                 val view = ItemListBinding.inflate(layoutInflater,parent,false)
@@ -86,9 +64,7 @@ class ListAdapter(private val clickListener: OnClickListener) :
         } else {
             val item = getItem(position)
             when (holder) {
-                is MyViewHolder -> holder.bind(item)
-                is MyViewHolderDelete -> holder.bind(item)
-                is MyViewHolderAdd -> holder.bind(item)
+                is MyViewHolder -> holder.bind(item,itemCount)
             }
         }
     }

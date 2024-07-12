@@ -1,4 +1,4 @@
-package com.example.calculator.adapter
+package com.example.calculator.presentation.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -23,7 +23,6 @@ class Adapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(recyclerList[position])
         Log.i("Tag", "${recyclerList[position]}")
     }
 

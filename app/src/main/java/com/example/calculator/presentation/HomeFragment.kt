@@ -1,13 +1,14 @@
-package com.example.calculator
+package com.example.calculator.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.calculator.presentation.viewModel.MyViewModel
+import com.example.calculator.R
 import com.example.calculator.databinding.FragmentHomeBinding
 import com.example.calculator.extentions.log
 
