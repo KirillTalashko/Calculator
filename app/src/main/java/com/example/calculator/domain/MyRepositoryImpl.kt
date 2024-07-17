@@ -7,9 +7,12 @@ class MyRepositoryImpl : MyRepository {
     }
 
     override fun fetchCurrentPrice(callback: (String?, Exception?) -> Unit) {
-        apiClient.fetchCurrentPrice { response, error ->
-            callback(response, error)
+        apiClient.fetchCurrentPrice { str, exp ->
+            callback(str, exp)
         }
     }
+
+    override fun fetchCurrentPriceRetrofit() = MyRetrofit().getClient().fetchCurrentPrice()
+
 
 }

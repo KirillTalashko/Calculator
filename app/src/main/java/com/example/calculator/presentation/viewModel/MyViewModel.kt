@@ -4,10 +4,11 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.calculator.domain.MyRepositoryImpl
+import com.example.calculator.domain.CoinDeskApiClient
+import com.example.calculator.domain.MyRepository
 import com.example.calculator.presentation.Action
 
-class MyViewModel(private val repository: MyRepositoryImpl) : ViewModel() {
+class MyViewModel(private val repository: MyRepository) : ViewModel() {
     val str = StringBuilder()
     val resultLiveData = MutableLiveData<String>()
     var firstNum = 0.0
@@ -93,17 +94,34 @@ class MyViewModel(private val repository: MyRepositoryImpl) : ViewModel() {
                 }
             }.start()
         }
+*/
+    init {
+        fetchCurrentPrice()
+    }
 
-        fun fetchCurrentPrice() {
+    private fun fetchCurrentPrice() {
             _state.value = MyViewModelState.Loading
             Thread {
-                repository.fetchCurrentPrice { response, exception ->
+                // val responseRetrofit = repository.fetchCurrentPriceRetrofit()
+                // Log.i("youTag","responseRetrofit $responseRetrofit")
+                CoinDeskApiClient().fetchCurrentPrice { response, exception ->
                     if (exception != null) {
                         _state.postValue(MyViewModelState.Error(exception))
+                        Log.i("youTag", "exception $exception")
                     } else if (response != null) {
                         _state.postValue(MyViewModelState.Success(response))
+                        Log.i("youTag", "response $response")
                     }
                 }
+                /*    repository.fetchCurrentPrice { response, exception ->
+                        if (exception != null) {
+                            _state.postValue(MyViewModelState.Error(exception))
+                            Log.i("youTag","exception $exception")
+                        } else if (response != null) {
+                            _state.postValue(MyViewModelState.Success(response))
+                            Log.i("youTag","response $response")
+                        }
+                    }*/
             }.start()
-        }*/
+    }
 }

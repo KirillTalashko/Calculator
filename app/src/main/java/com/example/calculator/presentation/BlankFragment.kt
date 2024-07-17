@@ -6,14 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.calculator.databinding.FragmentBlankBinding
+import com.example.calculator.domain.MyRepositoryImpl
 import com.example.calculator.presentation.adapter.ListAdapter
 import com.example.calculator.presentation.adapter.OnClickListener
+import com.example.calculator.presentation.viewModel.MyViewModel
+import com.example.calculator.presentation.viewModel.MyViewModelFactory
+import com.example.calculator.presentation.viewModel.MyViewModelState
 
 class BlankFragment : Fragment(), OnClickListener {
     private var _binding: FragmentBlankBinding? = null
     private val binding
         get() = _binding!!
+
+    //val viewModel: MyViewModel by viewModels<MyViewModel>() { MyRepositoryImpl() }
+    private val viewModel =
+        ViewModelProvider(this, MyViewModelFactory(MyRepositoryImpl()))[MyViewModel::class.java]
 
     private val recyclerList = mutableListOf(
         "News_1",
@@ -59,6 +68,14 @@ class BlankFragment : Fragment(), OnClickListener {
         Log.i("Tag", "${isPolidrome(polidrom)}")
         Log.i("Tag", "${isPolidrome(polidromEmpty)}")
         listAdapter.submitList(recyclerList)
+        viewModel.state.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is MyViewModelState.Error -> TODO()
+                MyViewModelState.Loading -> TODO()
+                is MyViewModelState.Success -> TODO()
+            }
+
+        }
     }
 
     override fun onDestroy() {
