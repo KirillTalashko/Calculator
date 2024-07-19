@@ -63,6 +63,9 @@ class SettingsFragment : Fragment() {
         binding.buttonClick.setOnClickListener {
             findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToBlankFragment())
         }
+        binding.buttonClickNetworkRequest.setOnClickListener {
+            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToBlankFragment2())
+        }
 
     }
     override fun onDestroy() {

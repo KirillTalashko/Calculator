@@ -10,6 +10,11 @@ class MyViewModelFactory(private val repository: MyRepositoryImpl) : ViewModelPr
             @Suppress("UNCHECKED_CAST")
             return ViewModelOrder(repository) as T
         }
+        if (modelClass.isAssignableFrom(MyViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return MyViewModel(repository) as T
+        }
         throw IllegalArgumentException("Unknown ViewModel class")
+
     }
 }

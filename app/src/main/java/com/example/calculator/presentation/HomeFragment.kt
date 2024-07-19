@@ -10,13 +10,16 @@ import androidx.navigation.fragment.findNavController
 import com.example.calculator.presentation.viewModel.MyViewModel
 import com.example.calculator.R
 import com.example.calculator.databinding.FragmentHomeBinding
+import com.example.calculator.domain.MyRepositoryImpl
 import com.example.calculator.extentions.log
+import com.example.calculator.model.StatusRequest
+import com.example.calculator.presentation.viewModel.MyViewModelFactory
 
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-    private val viewModel by lazy { ViewModelProvider(this).get(MyViewModel::class.java) }
+    private val viewModel by lazy {ViewModelProvider(this, factory = MyViewModelFactory(repository = MyRepositoryImpl()))[MyViewModel::class.java]}
 
     companion object {
         const val KEY = "str"
@@ -37,6 +40,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        viewModel.getData()
         viewModel.resultViewModel.observe(viewLifecycleOwner) { str ->
             binding.inputText.text = str
         }
