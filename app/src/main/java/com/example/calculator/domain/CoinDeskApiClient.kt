@@ -1,13 +1,11 @@
 package com.example.calculator.domain
 
-import com.example.calculator.extentions.log
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
-import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import java.io.IOException
 
@@ -38,7 +36,7 @@ class CoinDeskApiClient {
                                     " ${response.code} ${response.message}"
                         )
                     }
-                    callback(response.body.toString(), null)
+                    callback(response.body?.string(), null)
                 }
             }
         })
