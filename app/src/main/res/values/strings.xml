@@ -20,7 +20,8 @@
     <string name="_0">0</string>
 
     <string name="hello_text">Привет,Мир</string>
-    <string name="button_click">НАЖМИ МЕНЯ</string>
+    <string name="button_click">Список заказов</string>
+    <string name="button_click_network_request">Курс валют</string>
     <string name="edit">Введите текст</string>
     <string name="check">Флажок</string>
     <string name="radioButtonNightStyle">ночь</string>
