@@ -2,9 +2,9 @@ package com.example.calculator.domain
 
 import com.example.calculator.model.Order
 import com.example.calculator.model.OrderStatus
-import okhttp3.ResponseBody
+import retrofit2.Call
 
-class MyRepositoryImpl(): MyRepository {
+class MyRepositoryImpl : MyRepository {
 
     private val apiClient = CoinDeskApiClient()
 
@@ -25,5 +25,10 @@ class MyRepositoryImpl(): MyRepository {
             callback(response,exception)
         }
     }
+
+    override fun fetchCurrentPriceRetrofit(): Call<String>{
+        TODO()
+    }
+
 
 }

@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.calculator.domain.MyRepository
-import com.example.calculator.domain.MyRepositoryImpl
 import com.example.calculator.presentation.Action
 import com.example.calculator.extentions.log
 import com.example.calculator.model.StatusRequest
@@ -59,7 +58,6 @@ class MyViewModel(private val repository: MyRepository) : ViewModel() {
     }
 
     fun getData(){
-        _stateRequest.value = StatusRequest.Loading
         var count = 3
         var key = true
         Thread{
